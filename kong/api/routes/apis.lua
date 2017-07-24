@@ -55,9 +55,10 @@ return {
     end
   },
 
-  ["/apis/:api_name_or_id/plugins/:plugin_name_or_id"] = {
+  ["/apis/:api_name_or_id/plugins/:id"] = {
     before = function(self, dao_factory, helpers)
-      crud.find_plugin_by_name_or_id(self, dao_factory, helpers)
+      crud.find_api_by_name_or_id(self, dao_factory, helpers)
+      crud.find_plugin_by_id(self, dao_factory, {api_id = self.api.id}, helpers)
     end,
 
     GET = function(self, dao_factory, helpers)
